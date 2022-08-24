@@ -30,7 +30,7 @@ class People(db.Model):
 
     def serialize(self):
         return {
-            "id": self.uid,
+            "uid": self.uid,
             "name": self.name,
             "height":self.height,
             "hair_color":self.hair_color,
@@ -49,13 +49,13 @@ class FavPeople(db.Model):
 
     def serialize(self):
         return {
-            "id": self.uid,
+            "uid": self.uid,
             "user": self.user,
             "people":self.people
             # do not serialize the password, its a security breach
         }
 class Planetas(db.Model):
-    __tablename__:"planetas"
+    __tablename__="planetas"
     uid = db.Column(db.Integer, primary_key=True)
     name=db.Column(db.String(50),unique=True,nullable=False)
     population=db.Column(db.Integer,unique=True,nullable=False)
@@ -66,13 +66,13 @@ class Planetas(db.Model):
 
     def serialize(self):
         return {
-            "id": self.uid,
+            "uid": self.uid,
             "name": self.name,
-            "gender":self.population
+            "population":self.population
             # do not serialize the password, its a security breach
         }
 class FavPlanetas(db.Model):
-    __tablename__:"favplanetas"
+    __tablename__="favplanetas"
     id = db.Column(db.Integer, primary_key=True)
     user=db.Column(db.String(120),db.ForeignKey('user.email'))
     planetas=db.Column(db.String(50),db.ForeignKey('planetas.name'))
@@ -83,8 +83,8 @@ class FavPlanetas(db.Model):
 
     def serialize(self):
         return {
-            "id": self.uid,
+            "uid": self.uid,
             "user": self.user,
-            "people":self.planetas
+            "planeta":self.planetas
             # do not serialize the password, its a security breach
         }
